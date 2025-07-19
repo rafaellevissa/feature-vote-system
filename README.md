@@ -1,87 +1,215 @@
 # Feature Voting System
 
-A complete feature voting system with SQLite database, Flask API backend with clean architecture, and React Native mobile frontend.
+A complete feature voting system with SQLite database, Flask API backend with clean architecture, and React Native (Expo) frontend that runs on Web, iOS, and Android.
 
-## Features
+## ✨ Features
 
 - ✅ Users can post new feature requests
 - ✅ Users can upvote/downvote features
 - ✅ Features are sorted by popularity (upvotes)
 - ✅ Real-time vote tracking per user
 - ✅ Clean, modern mobile UI
+- ✅ Cross-platform support (Web, iOS, Android)
 - ✅ SQLite database with SQLAlchemy ORM
 - ✅ RESTful API with layered architecture
-- ✅ Cross-platform mobile app (iOS & Android)
+- ✅ Comprehensive unit tests
+- ✅ Pull-to-refresh functionality
+- ✅ Form validation and error handling
 
-## Architecture
+## 🏗️ Architecture
 
 ### Backend (Flask + SQLAlchemy + Clean Architecture)
-- **Database**: SQLite with SQLAlchemy ORM
-- **Architecture**: Layered architecture with separation of concerns
-  - **Models**: SQLAlchemy ORM models
-  - **Repositories**: Data access layer
-  - **Services**: Business logic layer
-  - **Routes**: API endpoints (presentation layer)
-  - **Schemas**: Request/response validation
-- **Design Patterns**: Repository pattern, Service layer pattern
-- **Features**: CRUD operations, vote tracking, user vote history
-
-### Frontend (React Native)
-- **Platform**: Cross-platform mobile app
-- **State Management**: React hooks with AsyncStorage
-- **UI**: Modern, responsive design with pull-to-refresh
-- **User Management**: Automatic unique user ID generation
-
-## Project Structure
-
 ```
 backend/
 ├── app.py                 # Application entry point
 ├── config.py             # Configuration settings
 ├── database.py           # Database configuration
 ├── models/               # SQLAlchemy models
-│   ├── __init__.py
-│   ├── base.py          # Base model class
-│   ├── feature.py       # Feature model
-│   └── vote.py          # Vote model
 ├── repositories/         # Data access layer
-│   ├── __init__.py
-│   ├── base.py          # Base repository
-│   ├── feature_repository.py
-│   └── vote_repository.py
 ├── services/            # Business logic layer
-│   ├── __init__.py
-│   ├── feature_service.py
-│   └── vote_service.py
 ├── routes/              # API routes/controllers
-│   ├── __init__.py
-│   ├── feature_routes.py
-│   └── health_routes.py
-└── schemas/             # Request/response schemas
-    ├── __init__.py
-    └── feature_schemas.py
+├── schemas/             # Request/response schemas
+└── tests/               # Unit tests
 ```
 
-## API Endpoints
+**Design Patterns**: Repository pattern, Service layer pattern, Dependency injection
 
-- `GET /api/features` - Get all features (sorted by upvotes)
-- `POST /api/features` - Create new feature
-- `GET /api/features/{id}` - Get specific feature
-- `DELETE /api/features/{id}` - Delete feature
-- `POST /api/features/{id}/upvote` - Upvote a feature
-- `DELETE /api/features/{id}/remove-vote` - Remove vote
-- `GET /api/user/{user_id}/votes` - Get user's votes
-- `GET /api/health` - Health check
+### Frontend (React Native + Expo)
+```
+frontend/
+├── App.js               # Root component
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── screens/         # Screen components
+│   ├── services/        # API and business logic
+│   ├── hooks/           # Custom React hooks
+│   ├── utils/           # Utility functions
+│   ├── styles/          # Design system
+│   └── navigation/      # Navigation setup
+```
 
-## Database Schema
+**Architecture**: Component-based architecture, Custom hooks, Service layer, Design system
 
-The application uses SQLAlchemy ORM with the following models:
+## 🚀 Quick Start
+
+### Prerequisites
+- **Backend**: Python 3.8+, pip
+- **Frontend**: Node.js 16+, npm
+- **Mobile Development**: Expo CLI
+
+### 1. Clone & Setup
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd feature-voting-system
+
+# Setup backend
+cd backend
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+
+# In a new terminal, setup frontend
+cd frontend
+npm install
+npm start
+```
+
+### 2. Access the Application
+- **API**: http://localhost:5000
+- **Web App**: Press `w` in Expo terminal or visit http://localhost:19006
+- **Mobile**: Install Expo Go app and scan QR code
+- **iOS Simulator**: Press `i` in Expo terminal (macOS only)
+- **Android Emulator**: Press `a` in Expo terminal
+
+## 📱 Platform Support
+
+| Platform | Status | How to Run |
+|----------|--------|------------|
+| **Web** | ✅ Ready | `npm run web` or press `w` |
+| **iOS** | ✅ Ready | `npm run ios` or press `i` |
+| **Android** | ✅ Ready | `npm run android` or press `a` |
+
+## 🛠️ Development Setup
+
+### Backend Development
+
+1. **Create virtual environment**:
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run development server**:
+   ```bash
+   python app.py
+   ```
+   Server runs on http://localhost:5000
+
+4. **Run tests**:
+   ```bash
+   python -m pytest tests/ -v
+   ```
+
+### Frontend Development
+
+1. **Install dependencies**:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+2. **Start development server**:
+   ```bash
+   npm start
+   ```
+
+3. **Platform-specific commands**:
+   ```bash
+   npm run web      # Web browser
+   npm run ios      # iOS simulator
+   npm run android  # Android emulator
+   ```
+
+## 🧪 Testing
+
+### Backend Tests
+```bash
+cd backend
+python -m pytest tests/ -v --coverage
+```
+
+**Test Coverage**:
+- ✅ Repository layer tests
+- ✅ Service layer tests  
+- ✅ API endpoint tests
+- ✅ Model validation tests
+- ✅ Error handling tests
+
+### Frontend Tests (Coming Soon)
+```bash
+cd frontend
+npm test
+```
+
+## 📚 API Documentation
+
+### Base URL
+- Development: `http://localhost:5000`
+- Production: `https://your-domain.com`
+
+### Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/features` | Get all features (sorted by upvotes) |
+| `POST` | `/api/features` | Create new feature |
+| `GET` | `/api/features/{id}` | Get specific feature |
+| `DELETE` | `/api/features/{id}` | Delete feature |
+| `POST` | `/api/features/{id}/upvote` | Upvote a feature |
+| `DELETE` | `/api/features/{id}/remove-vote` | Remove vote |
+| `GET` | `/api/user/{user_id}/votes` | Get user's votes |
+| `GET` | `/api/health` | Health check |
+
+### Request/Response Examples
+
+**Create Feature**:
+```json
+POST /api/features
+{
+  "title": "Dark mode support",
+  "description": "Add dark mode toggle to the app",
+  "author": "John Doe"
+}
+```
+
+**Response**:
+```json
+{
+  "id": 1,
+  "title": "Dark mode support",
+  "description": "Add dark mode toggle to the app", 
+  "author": "John Doe",
+  "upvotes": 0,
+  "created_at": "2025-01-20T10:30:00",
+  "updated_at": "2025-01-20T10:30:00"
+}
+```
+
+## 🗄️ Database Schema
 
 ### Feature Model
 - `id` (Primary Key)
-- `title` (String, required)
-- `description` (Text, optional)
-- `author` (String, required)
+- `title` (String, required, max 200 chars)
+- `description` (Text, optional, max 1000 chars)
+- `author` (String, required, max 100 chars)
 - `upvotes` (Integer, default 0)
 - `created_at` (DateTime)
 - `updated_at` (DateTime)
@@ -92,76 +220,143 @@ The application uses SQLAlchemy ORM with the following models:
 - `user_id` (String, required)
 - `created_at` (DateTime)
 - `updated_at` (DateTime)
-- Unique constraint on (feature_id, user_id)
+- **Unique constraint**: (feature_id, user_id)
 
-## Setup Instructions
+## 🎨 Design System
 
-### Backend Setup
+### Colors
+- **Primary**: #007AFF (iOS Blue)
+- **Success**: #34C759 (Green)
+- **Error**: #FF3B30 (Red)
+- **Background**: #F5F5F5 (Light Gray)
 
-1. **Create virtual environment**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+### Typography
+- **Headings**: System font, bold weights
+- **Body**: System font, regular weight
+- **Captions**: System font, medium weight
 
-2. **Install Python dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Components
+- **Button**: Primary, secondary, outline variants
+- **Input**: With validation and error states
+- **Modal**: Consistent overlay design
+- **Cards**: Material Design inspired
 
-3. **Run the Flask server**:
-   ```bash
-   python app.py
-   ```
-   
-   The API will be available at `http://localhost:5000`
+## 🔧 Configuration
 
-### React Native Setup
+### Backend Configuration
+Edit `backend/config.py`:
+```python
+class DevelopmentConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///features.db'
+```
 
-1. **Install React Native CLI** (if not already installed):
-   ```bash
-   npm install -g react-native-cli
-   ```
+### Frontend Configuration
+Edit `frontend/src/utils/constants.js`:
+```javascript
+export const API_CONFIG = {
+  BASE_URL: Platform.select({
+    android: 'http://10.0.2.2:5000',
+    ios: 'http://localhost:5000', 
+    web: 'http://localhost:5000',
+  }),
+};
+```
 
-2. **Install project dependencies**:
-   ```bash
-   npm install
-   ```
+## 🚢 Deployment
 
-3. **Install iOS dependencies** (iOS only):
-   ```bash
-   cd ios && pod install && cd ..
-   ```
+### Backend Deployment
+- **Heroku**: Ready for Heroku deployment
+- **DigitalOcean**: Production-ready with Gunicorn
+- **AWS/GCP**: Cloud deployment ready
 
-4. **Configure API URL**:
-   - Open `App.js`
-   - Update `API_BASE_URL` based on your setup:
-     - Android Emulator: `http://10.0.2.2:5000`
-     - iOS Simulator: `http://localhost:5000`
-     - Physical Device: `http://YOUR_COMPUTER_IP:5000`
+### Frontend Deployment
+- **Web**: Expo build for Netlify/Vercel
+- **Mobile**: Expo build service for app stores
+- **Progressive Web App**: PWA support included
 
-5. **Run the app**:
-   ```bash
-   # For Android
-   npx react-native run-android
-   
-   # For iOS
-   npx react-native run-ios
-   ```
+## 🔒 Security Features
 
-## Architecture Benefits
+- ✅ Input validation and sanitization
+- ✅ SQL injection prevention (SQLAlchemy ORM)
+- ✅ CORS configuration
+- ✅ Error handling without sensitive data exposure
+- ✅ Request/response validation schemas
 
-### Scalability
-- **Layered Architecture**: Easy to modify individual layers
-- **Repository Pattern**: Database queries centralized and reusable
-- **Service Layer**: Business logic separated from controllers
-- **Clean Separation**: Easy to add new features or change implementations
+## 🤝 Contributing
 
-### Maintainability
-- **Single Responsibility**: Each class has one clear purpose
-- **Dependency Injection**: Services can be easily mocked for testing
-- **Error Handling**: Centralized error handling in services
-- **Type Safety**: Clear interfaces and data structures
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Make changes and add tests
+4. Run tests: `npm test` and `pytest`
+5. Commit changes: `git commit -m 'Add amazing feature'`
+6. Push to branch: `git push origin feature/amazing-feature`
+7. Open a Pull Request
+
+## 📝 Development Notes
+
+### Adding New Features
+1. **Backend**: Model → Repository → Service → Route → Test
+2. **Frontend**: Component → Screen → Hook → Service → Style
+
+### Code Style
+- **Backend**: PEP 8 compliance, type hints recommended
+- **Frontend**: ESLint + Prettier, functional components with hooks
+
+### Performance Tips
+- Backend: Use database indexing, implement caching
+- Frontend: Lazy loading, image optimization, state management
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Backend Issues**:
+```bash
+# Virtual environment activation
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+# Database reset
+rm features.db
+python app.py  # Recreates database
+```
+
+**Frontend Issues**:
+```bash
+# Clear Expo cache
+expo start -c
+
+# Reset Metro bundler
+npx expo start --clear
+
+# Install web dependencies
+npx expo install react-native-web react-dom
+```
+
+### Platform-Specific Notes
+- **Android Emulator**: Use `http://10.0.2.2:5000` for API calls
+- **iOS Simulator**: Use `http://localhost:5000` for API calls  
+- **Physical Device**: Use your computer's IP address
+- **Web**: CORS must be enabled for API calls
+
+## 👥 Team
+
+- **Backend Architecture**: Clean architecture with Flask
+- **Frontend Development**: React Native with Expo
+- **Database Design**: SQLAlchemy ORM with SQLite
+- **Testing**: Comprehensive unit test coverage
+
+## 🔗 Links
+
+- [Expo Documentation](https://docs.expo.dev/)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [React Native Documentation](https://reactnative.dev/)
+- [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
+
+---
+
+**Ready to vote on features? Let's build something amazing together! 🚀**
 
 ### Testability
 - **Unit Testing**: Each layer can be tested independently
